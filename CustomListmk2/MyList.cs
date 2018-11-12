@@ -20,6 +20,8 @@ namespace CustomListmk2
             cap = 4;
             count = 0;
             items = new T[cap];
+    
+
 
         }
         public void Add(T item)
@@ -58,7 +60,18 @@ namespace CustomListmk2
         {
             items = new T[cap];
         }
-        public void Remove(int index)
+      
+        public void Remove(T thing)
+        {            
+            for (int i = 0; i < count; i++)
+            {
+                if (items[i].Equals(thing)) {
+                    items[i] = items[i + 1];
+                }
+            }
+            count--;
+        }
+        public void RemoveAt(int index)
         {
             while (count - 1 > index)
             {
@@ -99,7 +112,7 @@ namespace CustomListmk2
                 {
                     if (list1[i].Equals(list2[j]))
                     {
-                        list1.Remove(i);
+                        list1.RemoveAt(i);
                     }
                 }
             }
@@ -125,16 +138,13 @@ namespace CustomListmk2
             }
             return list;
         }
-        public IEnumerator<T> GetEnumerator()
+
+        public IEnumerator GetEnumerator()
         {
             for (int i = 0; i < count; i++)
             {
                 yield return this[i];
-            }  
-        }
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
+            }
         }
     }
 }
